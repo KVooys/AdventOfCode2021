@@ -1,4 +1,6 @@
-package org.example.adventofcode
+package com.adventofcode
+
+import java.io.File
 
 fun countDepthIncrements(input: List<Int>): Int {
     var increments = 0
@@ -29,3 +31,13 @@ fun countSlidingDepthIncrements(input: List<Int>): Int {
     return increments;
 }
 
+fun day1Results(rootPath: String){
+
+    var testInput : List<Int> = File(rootPath + "day1_test_input.txt").useLines { it.toList() }.map {n -> n.toInt()}
+    var input : List<Int> = File(rootPath + "day1_input.txt").useLines { it.toList() }.map { n -> n.toInt() }
+
+    println(countDepthIncrements(testInput))
+    println(countSlidingDepthIncrements(testInput))
+    println(countDepthIncrements(input));
+    print(countSlidingDepthIncrements(input))
+}
