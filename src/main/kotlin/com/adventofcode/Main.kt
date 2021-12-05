@@ -6,5 +6,6 @@ fun main() {
 //    day1Results(rootPath)
 //    day2Results(rootPath)
 //    day3Results(rootPath)
-    day4Results(rootPath)
+//    day4Results(rootPath)
+    day5Results(rootPath)
 }
