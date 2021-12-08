@@ -1,9 +1,8 @@
 package com.adventofcode
 
-import java.io.File
 import kotlin.math.abs
-import kotlin.math.min
 import kotlin.math.max
+import kotlin.math.min
 
 private fun parseVentCoords(input: List<String>) {
     var grid = createLargeGrid()
@@ -127,8 +126,8 @@ private fun createLargeGrid(): MutableList<MutableList<Int>> {
 
 
 fun day5Results(rootPath: String) {
-    var testInput: List<String> = File(rootPath + "day5_test_input.txt").useLines { it.toList() }
-    var input: List<String> = File(rootPath + "day5_input.txt").useLines { it.toList() }
+    var testInput: List<String> = readInput("day5_test")
+    var input: List<String> = readInput("day5")
 
     parseVentCoords(input)
 }

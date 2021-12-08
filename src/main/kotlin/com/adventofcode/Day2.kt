@@ -1,7 +1,5 @@
 package com.adventofcode
 
-import java.io.File
-
 fun calculateDepthAndHorizontalPosition(input: List<String>): Int {
     var depth = 0
     var horizontalPosition = 0
@@ -52,10 +50,10 @@ fun calculateAim(input: List<String>): Int {
 
 }
 
-fun day2Results(rootPath: String) {
-    var testInput: List<String> = File(rootPath + "day2_test_input.txt").useLines { it.toList() }
+fun day2Results() {
+    var testInput: List<String> = readInput("day2_test")
     println(calculateDepthAndHorizontalPosition(testInput))
-    var input: List<String> = File(rootPath + "day2_input.txt").useLines { it.toList() }
+    var input: List<String> = readInput("day2")
     println(calculateDepthAndHorizontalPosition(input))
 
     println(calculateAim(testInput))

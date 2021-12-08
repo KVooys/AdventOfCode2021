@@ -1,7 +1,5 @@
 package com.adventofcode
 
-import java.io.File
-
 const val BINGO_SIZE = 5
 const val PLACEHOLDER_NUMBER = 111
 
@@ -96,9 +94,9 @@ fun calculatePoints(calledNumber: Int, bingoCard: MutableList<MutableList<Int>>)
 }
 
 
-fun day4Results(rootPath: String) {
-    var testInput: List<String> = File(rootPath + "day4_test_input.txt").useLines { it.toList() }
-    var input: List<String> = File(rootPath + "day4_input.txt").useLines { it.toList() }
+fun day4Results() {
+    var testInput: List<String> = readInput("day4_test")
+    var input: List<String> = readInput("day4")
 
 //    var calledNumbers = parseCalledNumbers(testInput)
 //    var bingoCards = parseBingoCards(testInput)

@@ -1,6 +1,5 @@
 package com.adventofcode
 
-import java.io.File
 import kotlin.math.pow
 
 fun toDecimal(binaryNumber : String) : Int {
@@ -103,9 +102,9 @@ fun keepLeastCommonDigitsOrZeroes(input: List<String>) : Int {
 }
 
 
-fun day3Results(rootPath: String) {
-    var testInput: List<String> = File(rootPath + "day3_test_input.txt").useLines { it.toList() }
-    var input: List<String> = File(rootPath + "day3_input.txt").useLines { it.toList() }
+fun day3Results() {
+    var testInput: List<String> = readInput("day3_test")
+    var input: List<String> = readInput("day3")
     println(findMostAndLeastCommonBits(testInput))
     println(findMostAndLeastCommonBits(input))
     println(keepMostCommonDigitOrOnes(testInput) * keepLeastCommonDigitsOrZeroes(testInput))
