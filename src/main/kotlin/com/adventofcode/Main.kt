@@ -9,5 +9,7 @@ fun main() {
 //    day4Results()
 //    day5Results()
 //    day6Results()
-    day7Results()
+//    day7Results()
+    day8Results()
+
 }
