@@ -1,5 +1,7 @@
 package com.adventofcode
 
+import java.util.*
+
 data class Point(val x: Int, val y: Int)
 
 
@@ -34,7 +36,7 @@ private fun parsePoints(input: List<String>): Map<Point, Int> {
             println("Initializing basin from $point")
             globalVisitedSet = mutableSetOf(point)
             globalSizeMap[point] = 1
-            initializeBasinProcessing(point, point, mutableSetOf(point), pointsMap)
+            basinBFS(point, pointsMap)
         }
     }
 
@@ -48,49 +50,53 @@ private fun parsePoints(input: List<String>): Map<Point, Int> {
 
 // A basin can expand from a point in every direction, as long as the next value is not nine.
 // Then from that point it can also expand in every direction.
-// So we recur until a value of 8 is reached, then we stop.
-
-fun initializeBasinProcessing(
+// So a small BFS is implemented.
+fun basinBFS(
     initPoint: Point,
-    point: Point,
-    basin: Set<Point>,
     pointsMap: MutableMap<Point, Int>
 ) {
-    if (basin.size > globalSizeMap[initPoint]!!) {
-        globalSizeMap[initPoint] = basin.size
-    }
-
-    val x = point.x
-    val y = point.y
-    val value = pointsMap[point]
+    val x = initPoint.x
+    val y = initPoint.y
+    val value = pointsMap[initPoint]
     val pointNorth = Point(x, y - 1)
     val pointSouth = Point(x, y + 1)
     val pointWest = Point(x - 1, y)
     val pointEast = Point(x + 1, y)
+    val basin = mutableSetOf(initPoint)
 
-    // no point in flowing from a point of value 8, since the next point would be 9 and can't be part of basin.
-    if (value == 8) {
-        return
-    }
+    // BFS logic
+    var queue: ArrayDeque<Point> = ArrayDeque<Point>()
+    val visited: MutableSet<Point> = mutableSetOf()
 
-    // track new points
-    val newPoints: MutableSet<Point> = mutableSetOf()
 
-    // Try to flow in all directions, only if the adjacent exists, is unvisited and is 1 higher
-    for (newPoint in listOf(pointNorth, pointSouth, pointWest, pointEast)){
-        if (pointsMap[newPoint] != null && !basin.contains(newPoint) && pointsMap[newPoint] == pointsMap[point]?.plus(1)) {
-            newPoints.add(newPoint)
+    visited.add(initPoint)
+    queue.add(initPoint)
+
+    while (queue.size != 0) {
+        var point = queue.poll()
+        var neighbours = getNeighbours(point)
+
+        for (newPoint in neighbours) {
+            if (pointsMap[newPoint] != null && pointsMap[newPoint] != 9 && !basin.contains(newPoint)) {
+                basin.add(newPoint)
+                visited.add(newPoint)
+                queue.add(newPoint)
+            }
         }
     }
+    println(basin.size)
+    globalSizeMap[initPoint] = basin.size
+}
 
-    for (np in newPoints) {
-        globalVisitedSet.add(np)
-        initializeBasinProcessing(initPoint, np, basin.plus(newPoints), pointsMap)
-    }
-
-    if (globalVisitedSet.size > globalSizeMap[initPoint]!!) {
-        globalSizeMap[initPoint] = globalVisitedSet.size
-    }
+private fun getNeighbours(point: Point): List<Point> {
+    val x = point.x
+    val y = point.y
+    return listOf(
+        Point(x + 1, y),
+        Point(x - 1, y),
+        Point(x, y + 1),
+        Point(x, y - 1),
+    )
 }
 
 // A point is a low point if it's lower than all its surrounding points
