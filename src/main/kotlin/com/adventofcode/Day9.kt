@@ -2,9 +2,6 @@ package com.adventofcode
 
 import java.util.*
 
-data class Point(val x: Int, val y: Int)
-
-
 // Ugly workaround for part 2...
 var globalVisitedSet: MutableSet<Point> = mutableSetOf()
 var globalSizeMap: MutableMap<Point, Int> = mutableMapOf()
@@ -86,17 +83,6 @@ fun basinBFS(
     }
     println(basin.size)
     globalSizeMap[initPoint] = basin.size
-}
-
-private fun getNeighbours(point: Point): List<Point> {
-    val x = point.x
-    val y = point.y
-    return listOf(
-        Point(x + 1, y),
-        Point(x - 1, y),
-        Point(x, y + 1),
-        Point(x, y - 1),
-    )
 }
 
 // A point is a low point if it's lower than all its surrounding points
