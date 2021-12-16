@@ -63,7 +63,29 @@ fun getNeighboursDiagonally(point: Point): List<Point> {
 }
 
 /**
- * Pretty print a 2D map of Points
+ * Pretty print a list of Points as a 2D grid.
+ */
+fun prettyPrintPointsList(points: List<Point>) {
+    // find Y dimension
+    val maxY: Int = (points.maxOfOrNull { k -> k.y })!!
+    val maxX: Int = (points.maxOfOrNull { k -> k.x })!!
+    for(y in 0 .. maxY) {
+        var newLine = ""
+        for (x in 0..maxX) {
+            if (points.contains(Point(x,y))) {
+                newLine += "#"
+            }
+            else {
+                newLine += "."
+            }
+        }
+        println(newLine)
+    }
+}
+
+
+/**
+ * Pretty print a 2D map of Points to Ints.
  */
 
 fun prettyPrintPointsMap(points: Map<Point, Int>) {
