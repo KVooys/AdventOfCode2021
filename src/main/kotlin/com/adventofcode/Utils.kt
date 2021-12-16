@@ -3,7 +3,6 @@ package com.adventofcode
 import java.io.File
 
 
-
 fun readInput(path: String): List<String> {
     var rootPath = "C:\\Users\\kvooy\\Documents\\Code Projects\\AdventOfCode2021\\src\\main\\resources\\"
 
@@ -69,13 +68,12 @@ fun prettyPrintPointsList(points: List<Point>) {
     // find Y dimension
     val maxY: Int = (points.maxOfOrNull { k -> k.y })!!
     val maxX: Int = (points.maxOfOrNull { k -> k.x })!!
-    for(y in 0 .. maxY) {
+    for (y in 0..maxY) {
         var newLine = ""
         for (x in 0..maxX) {
-            if (points.contains(Point(x,y))) {
+            if (points.contains(Point(x, y))) {
                 newLine += "#"
-            }
-            else {
+            } else {
                 newLine += "."
             }
         }
@@ -90,9 +88,25 @@ fun prettyPrintPointsList(points: List<Point>) {
 
 fun prettyPrintPointsMap(points: Map<Point, Int>) {
     // find Y dimension
-    val maxY: Int = (points.keys.map{ k -> k.y }.maxOrNull())!!
+    val maxY: Int = (points.keys.map { k -> k.y }.maxOrNull())!!
     // print every row
-    for(y in 0 .. maxY) {
+    for (y in 0..maxY) {
         println(points.filter { (k, v) -> k.y == y }.values)
     }
+}
+
+/**
+ * Find character counts in a word.
+ */
+fun findCharacterCounts(word: String): Map<Char, Long> {
+    val frequencyMap = mutableMapOf<Char, Long>()
+    for (char in word) {
+
+        if (frequencyMap[char] == null) {
+            frequencyMap[char] = 1
+        } else {
+            frequencyMap[char] = frequencyMap[char]?.plus(1)!!
+        }
+    }
+    return frequencyMap
 }
