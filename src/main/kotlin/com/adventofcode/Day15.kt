@@ -30,16 +30,16 @@ fun explodeInput(input: List<String>) {
             pointsMap[Point(x, y)] = input[y][x].digitToInt()
 
             repeat(4){
-                val newCol = x + (colSize * counter)
-                val newRow = y + (rowSize * counter)
-                pointsMap[Point(newCol, y)] = (pointsMap[Point(x, y)]!! + it + 1).nextLevel()
-                pointsMap[Point(x, newRow)] = (pointsMap[Point(x, y)]!! + it + 1).nextLevel()
+                val newX = x + (colSize * counter)
+                val newY = y + (rowSize * counter)
+                pointsMap[Point(newX, y)] = (pointsMap[Point(x, y)]!! + it + 1).nextLevel()
+                pointsMap[Point(x, newY)] = (pointsMap[Point(x, y)]!! + it + 1).nextLevel()
 
                 var newCounter = 1
                 repeat(4){ count ->
                     pointsMap[
                             Point( x + (colSize * counter), y + (rowSize * newCounter))] =
-                        (pointsMap[Point(newCol, y)]!! + count + 1).nextLevel()
+                        (pointsMap[Point(newX, y)]!! + count + 1).nextLevel()
                     ++newCounter
                 }
 
@@ -91,6 +91,7 @@ private fun dijkstra(start: Point, pointsMap: Map<Point, Int>): Int {
 
         if (totalRiskLevel.getOrDefault(location, Int.MAX_VALUE) < riskLevel) continue
 
+        // add the new point's risk to risk level.
         for (adj in getValidNeighbours(location, pointsMap)) {
             if (visited.contains(adj)) continue
             val newRiskLevel = totalRiskLevel.getOrDefault(location, Int.MAX_VALUE) + pointsMap[adj]!!
