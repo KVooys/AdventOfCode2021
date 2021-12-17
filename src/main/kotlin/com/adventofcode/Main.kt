@@ -18,5 +18,6 @@ fun main() {
 //    day13Results()
 //    day14Results()
 //    day15Results()
-    day16Results()
+//    day16Results()
+    day17Results()
 }
